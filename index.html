@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Sci-fi Racer (dev)</title>
+  <style>html,body{color:#cfd6e4;background:#0b0d12;height:100%;margin:0;font:12px/1.35 ui-monospace,Consolas,monospace;overflow:hidden}canvas{display:block}#bar{z-index:5;background:#0b0d12cc;flex-wrap:wrap;align-items:center;gap:8px;padding:6px 10px;display:flex;position:fixed;top:0;left:0;right:0}#bar input{width:90px;color:inherit;font:inherit;background:#151a24;border:1px solid #2a3244;padding:2px 4px}button{color:inherit;font:inherit;cursor:pointer;background:#1b2232;border:1px solid #2a3244;padding:2px 8px}#help{opacity:.6}#lap{top:calc(var(--bar-h,34px) + 28px);letter-spacing:1px;text-shadow:0 0 6px #000;font-size:26px;font-weight:700;position:fixed;left:12px}#lap small{opacity:.75;letter-spacing:0;font-size:12px;font-weight:400;display:block}#mini{background:#0b0d12cc;border:1px solid #2a3244;width:180px;height:180px;position:fixed;bottom:10px;right:10px}#ladder{top:calc(var(--bar-h,34px) + 6px);background:#0b0d12cc;width:232px;padding:4px;position:fixed;right:10px}#ladder .row{cursor:pointer;border-left:3px solid #0000;align-items:center;gap:6px;padding:2px 4px;display:flex}#ladder .row.me{background:#fff2;border-left-color:#fff;font-weight:700}#ladder .pos{text-align:right;opacity:.7;width:14px}#ladder .dot{border-radius:50%;flex:none;width:10px;height:10px}#ladder .nm{white-space:nowrap;width:74px}#ladder .hp{background:#2a3244;flex:none;width:54px;height:6px}#ladder .hp i{height:100%;display:block}#ladder .st{text-align:right;white-space:nowrap;flex:1;font-size:11px}#ladder .wreck{opacity:.55}#feed{white-space:pre;background:#0b0d12cc;padding:6px 8px;position:fixed;bottom:8px;left:10px}#banner{text-align:center;text-shadow:0 0 10px #000;pointer-events:none;font-size:34px;font-weight:700;position:fixed;top:36%;left:0;right:0}#tune{top:calc(var(--bar-h,34px) + 6px);width:250px;max-height:calc(100% - var(--bar-h,34px) - 76px);z-index:4;background:#0b0d12ee;border:1px solid #2a3244;padding:6px 8px;display:none;position:fixed;left:12px;overflow-y:auto}#tune.open{display:block}#tune h4{color:#8fb4ff;margin:8px 0 2px;font-size:12px}#tune label{margin:2px 0;display:block}#tune .lv{justify-content:space-between;display:flex}#tune .lv b{color:#9fe39f;font-weight:400}#tune .lv b.chg{color:#ffd23f}#tune input[type=range]{width:100%;margin:0}#tune textarea{width:100%;height:70px;color:inherit;box-sizing:border-box;background:#151a24;border:1px solid #2a3244;font:11px ui-monospace,Consolas,monospace}body.tuneOpen #lap{top:auto;bottom:56px}#chartpanel{z-index:3;background:#0e1118ee;border:1px solid #2a3244;max-width:680px;margin:0 auto;padding:6px 8px;position:fixed;bottom:10px;left:310px;right:200px}#charthead{justify-content:space-between;align-items:center;gap:8px;display:flex}#charthead small{color:#8792a8;margin-left:8px;font-size:11px;font-weight:400}#chartlegend{flex-wrap:wrap;gap:2px 10px;margin:4px 0;font-size:11px;display:flex}#chartlegend span{cursor:pointer;white-space:nowrap}#chartlegend span.on{color:#fff;font-weight:700}#chartlegend i,#charttip i{border-radius:50%;width:8px;height:8px;margin-right:4px;display:inline-block}#chart{width:100%;height:210px;display:block}#charttip{pointer-events:none;background:#151a24;border:1px solid #2a3244;min-width:130px;padding:4px 6px;font-size:11px;display:none;position:absolute}#charttip span{float:right;color:#8792a8;margin-left:12px}#betpanel{top:calc(var(--bar-h,34px) + 100px);z-index:3;box-sizing:border-box;background:#0e1118ee;border:1px solid #2a3244;width:270px;padding:8px;position:fixed;left:12px}body.tuneOpen #betpanel{left:274px}#bethead{justify-content:space-between;gap:8px;font-size:13px;display:flex}#wallet{color:#9fe39f;font-weight:700}#betbar{background:#2a3244;height:4px;margin:6px 0}#betbar i{background:#ffd23f;height:100%;display:block}.betlabel{color:#8792a8;margin:6px 0 3px}#betpop{z-index:6;box-sizing:border-box;background:#0e1118f4;border:1px solid #c89a2a;width:236px;padding:8px;display:none;position:fixed;top:0;left:0}#betpop.open{display:block}#pophead{align-items:center;gap:6px;margin-bottom:6px;font-size:13px;display:flex}#popdot{border-radius:50%;flex:none;width:12px;height:12px}#popname{flex:1}#popclose{padding:0 8px}#poppayouts{justify-content:space-between;gap:4px;margin-top:6px;display:flex}#poppayouts div{text-align:center;background:#151a24;flex:1;padding:3px 0}#poppayouts small{color:#8792a8;font-size:10px;display:block}#popnote{color:#8792a8;min-height:0;margin-top:6px}#popnote:empty{display:none}#popremove{width:100%;margin-top:6px;padding:4px 0}#chips{align-items:center;gap:4px;display:flex}#chips button{flex:1;padding:4px 0}#stake{width:54px;color:inherit;font:inherit;box-sizing:border-box;background:#151a24;border:1px solid #2a3244;padding:3px 4px}#betpop button.sel{color:#fff;background:#5c4c17;border-color:#c89a2a}#betpop button:disabled{opacity:.35;cursor:default}#payouts{justify-content:space-between;gap:6px;margin-top:8px;display:flex}#payouts div{text-align:center;background:#151a24;flex:1;padding:3px 0}#payouts div.hit{color:#fff;background:#5c4c17}#payouts small{color:#8792a8;font-size:10px;display:block}#betmsg{min-height:16px;margin-top:8px}#topup,#nextrace{width:100%;margin-top:6px;padding:4px 0}#ladder .dot{font-size:0}body.mobile{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}body.mobile canvas{touch-action:none}body.mobile #bar,body.mobile #chartpanel,body.mobile #tune,body.mobile #feed,body.mobile #mini,body.mobile #payouts,body.mobile #stake{display:none!important}body.mobile #betpanel{width:auto;padding:calc(env(safe-area-inset-top) + 6px) 12px 6px;background:#0b0d12e6;border:0;border-bottom:1px solid #2a3244;top:0;left:0;right:0}body.mobile #bethead{font-size:15px}body.mobile #betbar{margin:4px 0}body.mobile #betmsg{min-height:0;margin-top:2px;font-size:13px}body.mobile #topup,body.mobile #nextrace{padding:10px 0;font-size:14px}body.mobile #lap{top:calc(var(--bet-h,70px) + 6px);font-size:18px}body.mobile #lap small{font-size:12px}body.mobile #ladder{width:auto;padding:2px 2px calc(2px + env(safe-area-inset-bottom));background:#0b0d12e6;border-top:1px solid #2a3244;display:flex;inset:auto 0 0}body.mobile #ladder .row{border-left:0;flex-direction:column;flex:1 1 0;justify-content:center;gap:3px;min-width:0;min-height:48px;padding:2px 0}body.mobile #ladder .row.me{background:#ffffff30}body.mobile #ladder .nm,body.mobile #ladder .st{display:none}body.mobile #ladder .pos{text-align:center;width:auto;font-size:11px}body.mobile #ladder .dot{color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;justify-content:center;align-items:center;width:20px;height:20px;font-size:11px;font-weight:700;display:flex}body.mobile #ladder .hp{width:78%;height:4px}body.mobile #banner{font-size:24px;top:30%}body.mobile #betpop{font-size:13px}body.mobile #chips button{padding:12px 0;font-size:14px}body.mobile #popclose{padding:6px 12px;font-size:14px}body.mobile #popremove{padding:10px 0;font-size:14px}</style>
+  <script type="module" crossorigin src="./assets/index-Cx3h1M9o.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/CanvasPool-B9GJ9aeL.js">
+  <link rel="modulepreload" crossorigin href="./assets/canvasUtils-De7KxJPK.js">
+  <link rel="modulepreload" crossorigin href="./assets/getPo2TextureFromSource-_t1A7Ais.js">
+  <link rel="modulepreload" crossorigin href="./assets/RenderTargetSystem-gFrjkq_8.js">
+  <link rel="modulepreload" crossorigin href="./assets/getTextureBatchBindGroup-CbVChWny.js">
+  <link rel="modulepreload" crossorigin href="./assets/CanvasRenderer-BhyaMR_f.js">
+</head>
+<body>
+  <div id="bar">
+    <label>seed <input id="seed" value="1" /></label>
+    <button id="randseed">random seed</button>
+    <button id="restart">restart</button>
+    <button id="pause">pause</button>
+    <button id="step">step</button>
+    <button id="tunebtn">tuning</button>
+    <button id="chartbtn">chart</button>
+    <span id="status"></span>
+    <span id="help">space pause | . step (shift x10) | - / = speed | 1-8 follow | 0 no pick | F full-track | R restart | N random seed | T tuning | G chart</span>
+  </div>
+  <div id="chartpanel">
+    <div id="charthead"><b><span id="charttitle"></span><small>dot = wipeout</small></b><button id="chartmode">show distance</button></div>
+    <div id="chartlegend"></div>
+    <canvas id="chart"></canvas>
+    <div id="charttip"></div>
+  </div>
+  <div id="lap"></div>
+  <div id="ladder"></div>
+  <canvas id="mini" width="360" height="360"></canvas>
+  <div id="feed"></div>
+  <div id="banner"></div>
+  <div id="betpanel">
+    <div id="bethead"><b id="bettitle"></b><span id="wallet"></span></div>
+    <div id="betbar"><i></i></div>
+    <div id="payouts"></div>
+    <div id="betmsg"></div>
+    <button id="topup"></button>
+    <button id="nextrace">next race now</button>
+  </div>
+  <div id="betpop">
+    <div id="pophead"><span id="popdot"></span><b id="popname"></b><button id="popclose" aria-label="Close">x</button></div>
+    <div id="chips"></div>
+    <div id="poppayouts"></div>
+    <div id="popnote"></div>
+    <button id="popremove">remove bet</button>
+  </div>
+  <div id="tune">
+    <div><button id="reset">reset all</button> <button id="copy">copy changed</button> <button id="apply">load pasted</button></div>
+    <textarea id="json" placeholder='changed values as JSON, e.g. {"catchUp.gapBonus": 0.3}; paste here and press "load pasted"'></textarea>
+    <div id="levers"></div>
+  </div>
+</body>
+</html>
